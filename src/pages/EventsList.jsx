@@ -33,14 +33,14 @@ function EventsList() {
     <div className="events-page">
       <div className="page-header">
         <h1>Upcoming Events</h1>
-        <p>Showing {events.length} events in New York</p>
+        <p>Showing {events.length} music events in New York</p>
       </div>
       
       <div className="events-container">
         <aside className="sidebar">
           <div className="filter-section">
-            <h2>Filters</h2>
-            <p className="filter-note">Category filters coming soon!</p>
+            <h2>Live Music</h2>
+            <p className="filter-note">Concerts and music events in New York.</p>
           </div>
         </aside>
         
@@ -50,7 +50,7 @@ function EventsList() {
           ) : events.length ? (
             events.map(event => <EventCard key={event.id} event={event} />)
           ) : (
-            <p className="events-message">No events were found for New York.</p>
+            <p className="events-message">No music events were found for New York.</p>
           )}
         </main>
       </div>

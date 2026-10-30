@@ -3,7 +3,7 @@ const BASE_URL = 'https://app.ticketmaster.com/discovery/v2';
 
 export const getEvents = async (city = 'New York', size = 20) => {
   const response = await fetch(
-    `${BASE_URL}/events.json?apikey=${API_KEY}&size=${size}&city=${city}`
+    `${BASE_URL}/events.json?apikey=${API_KEY}&size=${size}&city=${city}&classificationName=Music`
   );
   
   if (!response.ok) {
