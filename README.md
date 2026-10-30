@@ -8,7 +8,8 @@ EventFinder adapts its home, events, and event detail pages to mobile, tablet,
 and desktop screens. The Events page uses a single-column card layout on mobile,
 two columns on tablet and desktop, and places the filter sidebar beside the grid
 on desktop. Event cards include responsive images and touch-friendly detail
-links. The Ticketmaster API is configured to show music events in New York.
+links. The Ticketmaster API is configured to show Broadway and theatre events
+in New York.
 
 ## Setup Instructions
 
@@ -23,7 +24,7 @@ npm install
 ```bash
 npm run dev
 ```
-3. Open the app in your browser and resize the window to see the problems! You'll notice that you need an API key before you can start.
+3. Open the app in your browser. A Ticketmaster API key is required to load event listings.
 4. Get your Ticketmaster API key by doing the following
     - Go to https://developer.ticketmaster.com/
     - Click "Get Your API Key" or "Register"
@@ -46,8 +47,6 @@ npm run dev
 ```
 
 Open http://localhost:5173 in your browser.
-
-## Your Assignment
 
 The responsive layouts use mobile-first styles, flexible units, flexbox, and
 media queries. Check the Events page at 375px, 768px, and 1024px in your

@@ -1,10 +1,16 @@
 const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
 const BASE_URL = 'https://app.ticketmaster.com/discovery/v2';
 
-export const getEvents = async (city = 'New York', size = 20) => {
-  const response = await fetch(
-    `${BASE_URL}/events.json?apikey=${API_KEY}&size=${size}&city=${city}&classificationName=Music`
-  );
+export const getEvents = async (city = 'New York', size = 100) => {
+  const params = new URLSearchParams({
+    apikey: API_KEY,
+    size: String(size),
+    city,
+    classificationName: 'Arts & Theatre',
+    keyword: 'Broadway',
+    sort: 'date,asc',
+  });
+  const response = await fetch(`${BASE_URL}/events.json?${params}`);
   
   if (!response.ok) {
     throw new Error('Failed to fetch events');

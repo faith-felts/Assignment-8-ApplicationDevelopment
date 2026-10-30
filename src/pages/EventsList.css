@@ -76,7 +76,7 @@
   min-width: 0;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .events-page {
     width: min(100% - 3rem, 87.5rem);
   }
@@ -102,7 +102,7 @@
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 1024px) {
   .events-page {
     width: min(100% - 4rem, 87.5rem);
   }

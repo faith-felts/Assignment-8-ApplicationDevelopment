@@ -7,6 +7,7 @@ function EventsList() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const productions = [...new Map(events.map(event => [event.name, event])).values()];
 
   useEffect(() => {
     fetchEvents();
@@ -32,25 +33,27 @@ function EventsList() {
   return (
     <div className="events-page">
       <div className="page-header">
-        <h1>Upcoming Events</h1>
-        <p>Showing {events.length} music events in New York</p>
+        <h1>Broadway Musicals</h1>
+        <p>Showing {productions.length} Broadway productions in New York</p>
       </div>
       
       <div className="events-container">
         <aside className="sidebar">
           <div className="filter-section">
-            <h2>Live Music</h2>
-            <p className="filter-note">Concerts and music events in New York.</p>
+            <h2>New York Theatre</h2>
+            <p className="filter-note">Discover Broadway shows and musicals.</p>
           </div>
         </aside>
         
         <main className="events-grid">
           {error ? (
             <p className="events-message" role="alert">{error}</p>
-          ) : events.length ? (
-            events.map(event => <EventCard key={event.id} event={event} />)
+          ) : productions.length ? (
+            productions.map(event => <EventCard key={event.id} event={event} />)
           ) : (
-            <p className="events-message">No music events were found for New York.</p>
+            <p className="events-message">
+              No Broadway events were found for New York. Please try again later.
+            </p>
           )}
         </main>
       </div>
