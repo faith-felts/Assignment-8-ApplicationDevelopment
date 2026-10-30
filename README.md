@@ -2,20 +2,13 @@
 
 This is the starter application for **Assignment 9: Making Your App Work on Every Screen**.
 
-## Current Problems
+## Responsive Features
 
-This app is **broken on mobile devices**. Try these things to see the problems:
-
-1. Resize your browser window to 375px wide (phone size)
-2. Open it on your actual phone
-3. Use Chrome DevTools responsive mode
-
-You'll see:
-- The header navigation doesn't fit
-- The sidebar and events grid don't stack properly
-- Text is too large on mobile
-- The event cards look stretched
-- Everything requires horizontal scrolling
+EventFinder adapts its home, events, and event detail pages to mobile, tablet,
+and desktop screens. The Events page uses a single-column card layout on mobile,
+two columns on tablet and desktop, and places the filter sidebar beside the grid
+on desktop. Event cards include responsive images and touch-friendly detail
+links. The Ticketmaster API is configured to show music events in New York.
 
 ## Setup Instructions
 
@@ -56,12 +49,9 @@ Open http://localhost:5173 in your browser.
 
 ## Your Assignment
 
-Make this application fully responsive using:
-- Mobile-first design approach
-- Responsive CSS units (rem, em, %, vw, vh)
-- CSS Flexbox and Grid
-- Media queries
-- Accessibility best practices
+The responsive layouts use mobile-first styles, flexible units, flexbox, and
+media queries. Check the Events page at 375px, 768px, and 1024px in your
+browser's responsive design mode.
 
 The app should look great on:
 - Mobile phones (320px - 480px)

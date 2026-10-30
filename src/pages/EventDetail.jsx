@@ -7,38 +7,54 @@ function EventDetail() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
+    const fetchEventDetail = async () => {
+      setLoading(true);
+      setError('');
+
+      try {
+        const data = await getEventById(id);
+        setEvent(data);
+      } catch (error) {
+        console.error('Error fetching event:', error);
+        setEvent(null);
+        setError('Event details could not be loaded. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchEventDetail();
   }, [id]);
 
-  const fetchEventDetail = async () => {
-    try {
-      const data = await getEventById(id);
-      setEvent(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching event:', error);
-      setLoading(false);
-    }
-  };
-
   if (loading) {
-    return <div className="loading">Loading event details...</div>;
+    return <div className="detail-message" role="status">Loading event details...</div>;
+  }
+
+  if (error) {
+    return <div className="detail-message" role="alert">{error}</div>;
   }
 
   if (!event) {
-    return <div className="error">Event not found</div>;
+    return <div className="detail-message" role="alert">Event not found.</div>;
   }
 
   const venue = event._embedded?.venues?.[0];
+  const imageUrl = event.images?.[0]?.url;
+  const city = venue?.city?.name;
+  const state = venue?.state?.stateCode;
+  const location = [city, state].filter(Boolean).join(', ');
 
   return (
     <div className="event-detail">
       <div className="detail-container">
-        <div className="detail-image">
-          <img src={event.images[0].url} alt={event.name} />
-        </div>
+        {imageUrl && (
+          <div className="detail-image">
+            <img src={imageUrl} alt="" />
+          </div>
+        )}
         
         <div className="detail-content">
           <h1 className="detail-title">{event.name}</h1>
@@ -46,20 +62,20 @@ function EventDetail() {
           <div className="detail-info">
             <div className="info-item">
               <strong>Date:</strong>
-              <span>{event.dates.start.localDate}</span>
+              <span>{event.dates?.start?.localDate || 'To be announced'}</span>
             </div>
             <div className="info-item">
               <strong>Time:</strong>
-              <span>{event.dates.start.localTime || 'TBA'}</span>
+              <span>{event.dates?.start?.localTime || 'To be announced'}</span>
             </div>
             <div className="info-item">
               <strong>Venue:</strong>
-              <span>{venue?.name}</span>
+              <span>{venue?.name || 'To be announced'}</span>
             </div>
             <div className="info-item">
               <strong>Location:</strong>
               <span>
-                {venue?.city?.name}, {venue?.state?.stateCode}
+                {location || 'To be announced'}
               </span>
             </div>
           </div>
