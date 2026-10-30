@@ -6,6 +6,7 @@ import './EventsList.css';
 function EventsList() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchEvents();
@@ -18,12 +19,14 @@ function EventsList() {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching events:', error);
+      setError('Events could not be loaded. Please try again later.');
+    } finally {
       setLoading(false);
     }
   };
 
   if (loading) {
-    return <div className="loading">Loading events...</div>;
+    return <div className="loading" role="status">Loading events...</div>;
   }
 
   return (
@@ -42,9 +45,13 @@ function EventsList() {
         </aside>
         
         <main className="events-grid">
-          {events.map(event => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          {error ? (
+            <p className="events-message" role="alert">{error}</p>
+          ) : events.length ? (
+            events.map(event => <EventCard key={event.id} event={event} />)
+          ) : (
+            <p className="events-message">No events were found for New York.</p>
+          )}
         </main>
       </div>
     </div>
